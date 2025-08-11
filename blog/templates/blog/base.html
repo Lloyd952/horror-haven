@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet" />
+    <title>{% block title %}Horror Film Reviews{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+        <h1>
+            <a href="{% url 'blog:post_list' %}">🎬 HORROR HAVEN 🎬</a>
+        </h1>
+        <h2>Your Ultimate Guide to Terror Cinema</h2>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'blog:post_list' %}">All Reviews</a></li>
+            <li><a href="{% url 'admin:index' %}">Admin</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Logout ({{ user.username }})</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="main-content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        
+        <div class="sidebar">
+            <h3>🔥 Most Commented Reviews</h3>
+            <ul>
+                {% for post in most_commented_posts %}
+                    <li>
+                        <a href="{{ post.get_absolute_url }}">
+                            {{ post.film_title }} ({{ post.year }})
+                            <br><small>💬 {{ post.comment_count }} comments</small>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <h3>⭐ Highest Rated</h3>
+            <ul>
+                {% for post in highest_rated %}
+                    <li>
+                        <a href="{{ post.get_absolute_url }}">
+                            {{ post.film_title }} ({{ post.year }})
+                            <br><small>{{ post.get_rating_display }}</small>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            {% if user.is_authenticated %}
+                <h3>👤 Welcome, {{ user.username }}!</h3>
+                <p>Ready to share your horror expertise?</p>
+            {% else %}
+                <h3>👻 Join the Horror Community</h3>
+                <p>Sign up to review and discuss your favorite horror films!</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Horror Haven - Where Fear Meets Film</p>
+        <p>🎭 Dedicated to the art of cinematic terror 🎭</p>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+  </body>
+</html>
