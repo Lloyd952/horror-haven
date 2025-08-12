@@ -62,6 +62,27 @@ nav {
     border-bottom: 2px solid var(--blood-red);
 }
 
+/* Link States - Accessibility and Theme Consistency */
+a:link {
+    color: var(--cream);
+    text-decoration: none;
+}
+
+a:visited {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--white);
+    text-decoration: underline;
+}
+
+a:active {
+    color: var(--blood-red);
+    text-decoration: underline;
+}
+
 nav ul {
     list-style: none;
     padding: 0;
@@ -80,10 +101,15 @@ nav a {
     transition: all 0.3s ease;
 }
 
+nav a:visited {
+    color: var(--gold);
+}
+
 nav a:hover {
     background-color: var(--blood-red);
     color: var(--white);
     box-shadow: 0 0 10px rgba(139, 0, 0, 0.7);
+    text-decoration: none;
 }
 
 /* Review Cards */
