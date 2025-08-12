@@ -11,6 +11,7 @@ def register(request):
             new_user = form.save(commit=False)
             new_user.set_password(form.cleaned_data['password'])
             new_user.save()
+            messages.success(request, 'Registration successful! Please log in.')
             return redirect('login')
     else:
         form = UserRegistrationForm()
