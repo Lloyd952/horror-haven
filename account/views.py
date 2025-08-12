@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from .forms import UserRegistrationForm
 
 
@@ -14,3 +15,10 @@ def register(request):
     else:
         form = UserRegistrationForm()
     return render(request, 'account/register.html', {'form': form})
+
+
+def logout_view(request):
+    """Custom logout view that allows GET requests"""
+    logout(request)
+    messages.success(request, 'You have been successfully logged out.')
+    return redirect('blog:post_list')
