@@ -265,9 +265,10 @@ nav a:hover {
 }
 
 .comment-date {
-    color: var(--light-gray);
+    color: var(--gold);
     font-size: 0.9em;
     font-style: italic;
+    opacity: 0.8;
 }
 
 /* Forms */
@@ -276,6 +277,48 @@ form {
     padding: 20px;
     border-radius: 8px;
     border: 2px solid var(--blood-red);
+}
+
+/* Comment Form Specific Styling */
+.comment-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 15px;
+    border: 2px solid var(--blood-red);
+    border-radius: 8px;
+    background-color: var(--dark-gray);
+    color: var(--cream);
+    font-family: inherit;
+    font-size: 1em;
+    resize: vertical;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.comment-textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.comment-submit-btn {
+    background: linear-gradient(45deg, var(--blood-red), var(--dark-red));
+    color: var(--white);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    font-size: 1em;
+    margin-top: 15px;
+}
+
+.comment-submit-btn:hover {
+    background: linear-gradient(45deg, var(--dark-red), var(--blood-red));
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.8);
+    transform: translateY(-2px);
 }
 
 .form-group {
