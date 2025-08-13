@@ -49,10 +49,11 @@ header h1 {
 }
 
 header h2 {
-    color: var(--cream);
+    color: var(--gold);
     font-size: 1.2em;
     margin: 10px 0 0 0;
     font-style: italic;
+    text-shadow: 1px 1px 2px var(--black);
 }
 
 /* Navigation */
@@ -154,16 +155,25 @@ nav a:hover {
 
 .review-card h2 a:visited {
     color: var(--gold);
-    opacity: 0.85;
+    opacity: 0.9;
     position: relative;
+    text-decoration: line-through;
+    text-decoration-color: var(--blood-red);
+    text-decoration-thickness: 2px;
 }
 
 .review-card h2 a:visited::after {
-    content: '👁️';
-    font-size: 0.6em;
+    content: '👁️ READ';
+    font-size: 0.5em;
     margin-left: 8px;
-    opacity: 0.7;
+    opacity: 0.8;
     vertical-align: middle;
+    background-color: var(--blood-red);
+    color: var(--white);
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 .review-card h2 a:hover {
