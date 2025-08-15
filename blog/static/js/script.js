@@ -26,9 +26,6 @@ function trackVisitedLinks() {
         const hasVisited = localStorage.getItem(linkKey);
         
         if (hasVisited) {
-            // Add visited styling
-            link.classList.add('visited-link');
-            
             // Create and add the eye icon
             const eyeIcon = document.createElement('span');
             eyeIcon.className = 'visited-indicator';
@@ -61,12 +58,6 @@ function trackVisitedLinks() {
 function addVisitedStyles() {
     const style = document.createElement('style');
     style.textContent = `
-        .review-card h2 a.visited-link {
-            text-decoration: line-through;
-            text-decoration-color: #8B0000;
-            text-decoration-thickness: 2px;
-        }
-        
         .visited-indicator {
             animation: fadeIn 0.5s ease-in;
         }
@@ -83,6 +74,21 @@ function addVisitedStyles() {
 document.addEventListener('DOMContentLoaded', function() {
     addVisitedStyles();
     trackVisitedLinks();
+});
+
+// Handle browser back/forward navigation
+window.addEventListener('popstate', function() {
+    // Small delay to ensure DOM is updated
+    setTimeout(() => {
+        trackVisitedLinks();
+    }, 100);
+});
+
+// Also handle when page becomes visible again (for mobile browsers)
+document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+        trackVisitedLinks();
+    }
 });
 
 // Add any other JavaScript functionality here as needed
