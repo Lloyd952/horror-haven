@@ -153,28 +153,7 @@ nav a:hover {
     transition: all 0.3s ease;
 }
 
-.review-card h2 a:visited {
-    color: var(--gold);
-    opacity: 0.9;
-    position: relative;
-    text-decoration: line-through;
-    text-decoration-color: var(--blood-red);
-    text-decoration-thickness: 2px;
-}
-
-.review-card h2 a:visited::after {
-    content: '👁️ READ';
-    font-size: 0.5em;
-    margin-left: 8px;
-    opacity: 0.8;
-    vertical-align: middle;
-    background-color: var(--blood-red);
-    color: var(--white);
-    padding: 2px 6px;
-    border-radius: 10px;
-    font-weight: bold;
-    text-decoration: none;
-}
+/* Visited link styling will be handled by JavaScript for better reliability */
 
 .review-card h2 a:hover {
     color: var(--white);
