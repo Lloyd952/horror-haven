@@ -21,6 +21,11 @@ function trackVisitedLinks() {
     const reviewLinks = document.querySelectorAll('.review-card h2 a');
     
     reviewLinks.forEach(link => {
+        // Check if this link already has an event listener
+        if (link.dataset.hasEventListener === 'true') {
+            return; // Skip if already processed
+        }
+        
         // Check if this link has been visited
         const linkKey = `visited_${link.href}`;
         const hasVisited = localStorage.getItem(linkKey);
@@ -47,10 +52,16 @@ function trackVisitedLinks() {
             link.appendChild(eyeIcon);
         }
         
-        // Add click event to mark as visited
+        // Add click event to mark as visited (only once)
         link.addEventListener('click', function() {
-            localStorage.setItem(linkKey, 'true');
+            // Only set localStorage if it hasn't been set before
+            if (!localStorage.getItem(linkKey)) {
+                localStorage.setItem(linkKey, 'true');
+            }
         });
+        
+        // Mark this link as having an event listener
+        link.dataset.hasEventListener = 'true';
     });
 }
 
@@ -78,18 +89,51 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Handle browser back/forward navigation
 window.addEventListener('popstate', function() {
-    // Small delay to ensure DOM is updated
-    setTimeout(() => {
-        trackVisitedLinks();
-    }, 100);
+    // Only re-run if we're on a page with review links
+    if (document.querySelector('.review-card h2 a')) {
+        // Small delay to ensure DOM is updated
+        setTimeout(() => {
+            trackVisitedLinks();
+        }, 100);
+    }
 });
 
 // Also handle when page becomes visible again (for mobile browsers)
 document.addEventListener('visibilitychange', function() {
-    if (!document.hidden) {
+    if (!document.hidden && document.querySelector('.review-card h2 a')) {
         trackVisitedLinks();
     }
 });
 
 // Add any other JavaScript functionality here as needed
 console.log('Horror Haven JavaScript loaded successfully!');
+
+// Utility functions for managing read stamps
+function clearAllReadStamps() {
+    // Clear all visited_* items from localStorage
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('visited_')) {
+            keysToRemove.push(key);
+        }
+    }
+    keysToRemove.forEach(key => localStorage.removeItem(key));
+    
+    // Remove all eye icons from the page
+    const eyeIcons = document.querySelectorAll('.visited-indicator');
+    eyeIcons.forEach(icon => icon.remove());
+    
+    console.log('All read stamps cleared');
+}
+
+function isReviewRead(reviewUrl) {
+    const linkKey = `visited_${reviewUrl}`;
+    return localStorage.getItem(linkKey) === 'true';
+}
+
+// Make utility functions available globally for debugging
+window.HorrorHavenUtils = {
+    clearAllReadStamps,
+    isReviewRead
+};
