@@ -259,11 +259,82 @@ horror-haven/
 - **Responsive design** principles
 - **Accessibility considerations**
 
+### **Testing & Quality Assurance**
+- **Comprehensive automated testing** with Django test framework
+- **Manual testing procedures** for functionality and usability
+- **Test coverage targets** of 90%+ for critical components
+- **Continuous integration** with automated test execution
+- **Security testing** for authentication and data validation
+
 ### **Version Control**
 - **Git workflow** with feature branches
 - **Meaningful commit messages** for project history
 - **Regular deployments** to Heroku
 - **GitHub integration** for collaboration
+
+## 🧪 Testing & Quality Assurance
+
+### **Automated Testing**
+
+The project includes comprehensive automated tests covering:
+
+- **Models**: Review and Comment model functionality
+- **Views**: All view endpoints and user interactions
+- **Forms**: Form validation and data processing
+- **Authentication**: User registration, login, and access control
+- **Security**: CSRF protection, password hashing, session management
+- **Responsiveness**: Static file loading and template rendering
+
+#### **Running Tests**
+
+```bash
+# Run all tests
+python manage.py test
+
+# Run specific app tests
+python manage.py test blog
+python manage.py test account
+
+# Run with coverage report
+coverage run --source='.' manage.py test
+coverage report
+coverage html  # Generates detailed HTML report
+```
+
+#### **Test Coverage Goals**
+
+- **Models**: 100% coverage
+- **Views**: 95%+ coverage  
+- **Forms**: 100% coverage
+- **URLs**: 100% coverage
+- **Overall**: 90%+ coverage target
+
+### **Manual Testing Procedures**
+
+Comprehensive manual testing procedures are documented in `TESTING.md` covering:
+
+- **User Authentication**: Registration, login, logout workflows
+- **Review Management**: Display, navigation, and interaction
+- **Comment System**: Adding, editing, and managing comments
+- **Responsive Design**: Cross-device and cross-browser testing
+- **Data Management**: CRUD operations and validation
+- **Performance**: Page load times and database efficiency
+- **Security**: Authentication, access control, and input validation
+
+### **Testing Tools & Infrastructure**
+
+- **Django Test Framework**: Built-in testing capabilities
+- **Coverage.py**: Code coverage analysis
+- **GitHub Actions**: Automated testing pipeline
+- **Heroku**: Staging and production deployment testing
+- **Browser DevTools**: Frontend testing and debugging
+
+### **Quality Metrics**
+
+- **Test Reliability**: Minimize flaky tests
+- **Execution Time**: Target < 30 seconds for full test suite
+- **Bug Detection**: Track testing vs. production issue discovery
+- **Code Quality**: Maintain high standards with regular reviews
 
 ## 🌟 Sample Content
 
