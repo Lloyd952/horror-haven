@@ -8,6 +8,13 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
+
+PRODUCTION CONFIGURATION:
+- DEBUG is set to False by default for security
+- ALLOWED_HOSTS is restricted to your Heroku domain
+- Security headers and HTTPS are enforced in production
+- Static files are served via WhiteNoise
+- Database uses Heroku's PostgreSQL in production
 """
 
 from pathlib import Path
@@ -17,17 +24,34 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Environment variables
+# For local development, create a .env file with:
+# DEBUG=True
+# SECRET_KEY=your-secret-key-here
+# 
+# For production (Heroku), these are set automatically
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-5&0y3zgv8ka06gsix4*s8#w03tf=0)-liitu^nodl)&#ugi_*a')
+
+# Heroku domain - update this if you change your app name
+HEROKU_DOMAIN = 'horror-haven-be1b58f3699e.herokuapp.com'
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-5&0y3zgv8ka06gsix4*s8#w03tf=0)-liitu^nodl)&#ugi_*a')
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+# Configure ALLOWED_HOSTS for production
+ALLOWED_HOSTS = [
+    HEROKU_DOMAIN,  # Your Heroku domain
+    'localhost',  # For local development
+    '127.0.0.1',  # For local development
+]
 
-ALLOWED_HOSTS = ['*']  # Configure this properly for production
+# Only allow wildcard hosts in development
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -148,11 +172,71 @@ LOGIN_URL = 'login'
 
 # Security settings for production
 if not DEBUG:
+    # Security headers
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
     SECURE_HSTS_SECONDS = 31536000
     SECURE_REDIRECT_EXEMPT = []
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+    
+    # Additional security settings
+    SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+    X_FRAME_OPTIONS = 'DENY'
+    
+    # Performance optimizations for production
+    TEMPLATES[0]['OPTIONS']['debug'] = False
+    
+    # Cache settings for production
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'unique-snowflake',
+        }
+    }
+    
+    # Logging configuration for production
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'console': {
+                'class': 'logging.StreamHandler',
+            },
+        },
+        'root': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['console'],
+                'level': 'INFO',
+                'propagate': False,
+            },
+        },
+    }
+else:
+    # Development-specific settings
+    ALLOWED_HOSTS = ['*']
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    
+    # Development logging
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'console': {
+                'class': 'logging.StreamHandler',
+            },
+        },
+        'root': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    }

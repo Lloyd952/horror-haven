@@ -1,0 +1,284 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Page Not Found - Horror Haven{% endblock %}
+
+{% block content %}
+<div class="error-page">
+    <div class="error-content">
+        <div class="error-icon">
+            <span class="ghost">👻</span>
+            <span class="skull">💀</span>
+            <span class="spider">🕷️</span>
+        </div>
+        
+        <h1 class="error-title">404 - Page Not Found</h1>
+        
+        <div class="error-message">
+            <p class="spooky-text">🎬 <em>"The page you're looking for has vanished into the shadows..."</em> 🎬</p>
+            
+            <div class="error-description">
+                <p>Like a scene from a horror film, this page has mysteriously disappeared. Perhaps it was:</p>
+                <ul class="error-reasons">
+                    <li>🔪 Slashed by a mysterious killer</li>
+                    <li>👻 Haunted away by restless spirits</li>
+                    <li>🕷️ Wrapped in a web of confusion</li>
+                    <li>🧟‍♂️ Eaten by zombies</li>
+                </ul>
+            </div>
+            
+            <div class="escape-options">
+                <h3>🚪 Escape Routes:</h3>
+                <div class="navigation-buttons">
+                    <a href="{% url 'blog:post_list' %}" class="btn btn-primary">
+                        🏠 Return to Horror Haven
+                    </a>
+                    <a href="{% url 'blog:post_list' %}" class="btn btn-secondary">
+                        🎭 Browse Horror Reviews
+                    </a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}" class="btn btn-danger">
+                            🚪 Logout & Flee
+                        </a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-danger">
+                            🔐 Login to Survive
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="horror-quote">
+                <blockquote>
+                    <p>"The oldest and strongest emotion of mankind is fear, and the oldest and strongest kind of fear is fear of the unknown."</p>
+                    <cite>— H.P. Lovecraft</cite>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.error-page {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d1b3d 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    margin: 2rem 0;
+}
+
+.error-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.error-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.error-icon .ghost {
+    animation-delay: 0s;
+}
+
+.error-icon .skull {
+    animation-delay: 1s;
+}
+
+.error-icon .spider {
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.error-title {
+    font-size: 3rem;
+    color: #ff6b6b;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    margin-bottom: 1.5rem;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+}
+
+.spooky-text {
+    font-size: 1.3rem;
+    color: #f8f9fa;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.error-description {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    border-left: 4px solid #ff6b6b;
+}
+
+.error-description p {
+    color: #e9ecef;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.error-reasons {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.error-reasons li {
+    color: #ced4da;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.error-reasons li:hover {
+    background: rgba(255, 107, 107, 0.1);
+    transform: translateX(10px);
+}
+
+.escape-options {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    border-left: 4px solid #4ecdc4;
+}
+
+.escape-options h3 {
+    color: #4ecdc4;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.navigation-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    color: white;
+    border-color: #ff6b6b;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    color: white;
+    border-color: #4ecdc4;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(45deg, #44a08d, #4ecdc4);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+}
+
+.btn-danger {
+    background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+    color: white;
+    border-color: #6c5ce7;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(45deg, #a29bfe, #6c5ce7);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+.horror-quote {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #fdcb6e;
+    margin-top: 2rem;
+}
+
+.horror-quote blockquote {
+    margin: 0;
+    color: #f8f9fa;
+    font-style: italic;
+}
+
+.horror-quote blockquote p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.horror-quote cite {
+    color: #fdcb6e;
+    font-size: 0.9rem;
+    font-style: normal;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .error-title {
+        font-size: 2rem;
+    }
+    
+    .error-icon {
+        font-size: 3rem;
+    }
+    
+    .navigation-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+    
+    .error-reasons {
+        max-width: 100%;
+    }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+    .error-page {
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a0f2e 100%);
+    }
+    
+    .error-description,
+    .escape-options,
+    .horror-quote {
+        background: rgba(255, 255, 255, 0.08);
+    }
+}
+</style>
+{% endblock %}

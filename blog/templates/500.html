@@ -1,0 +1,336 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Server Error - Horror Haven{% endblock %}
+
+{% block content %}
+<div class="error-page">
+    <div class="error-content">
+        <div class="error-icon">
+            <span class="monster">👹</span>
+            <span class="demon">😈</span>
+            <span class="alien">👽</span>
+        </div>
+        
+        <h1 class="error-title">500 - Server Error</h1>
+        
+        <div class="error-message">
+            <p class="spooky-text">🎬 <em>"Something dark and terrible has happened to our server..."</em> 🎬</p>
+            
+            <div class="error-description">
+                <p>The Horror Haven server has encountered a terrifying error. It might be:</p>
+                <ul class="error-reasons">
+                    <li>👹 Possessed by a digital demon</li>
+                    <li>😈 Corrupted by dark forces</li>
+                    <li>👽 Abducted by alien technology</li>
+                    <li>🧟‍♂️ Overwhelmed by zombie requests</li>
+                </ul>
+            </div>
+            
+            <div class="escape-options">
+                <h3>🚪 Survival Strategies:</h3>
+                <div class="navigation-buttons">
+                    <a href="{% url 'blog:post_list' %}" class="btn btn-primary">
+                        🏠 Return to Horror Haven
+                    </a>
+                    <a href="{% url 'blog:post_list' %}" class="btn btn-secondary">
+                        🔄 Try Again Later
+                    </a>
+                    <a href="{% url 'admin:index' %}" class="btn btn-danger">
+                        🛠️ Admin Portal
+                    </a>
+                </div>
+            </div>
+            
+            <div class="horror-quote">
+                <blockquote>
+                    <p>"In the midst of chaos, there is also opportunity."</p>
+                    <cite>— Sun Tzu</cite>
+                </blockquote>
+            </div>
+            
+            <div class="technical-info">
+                <details>
+                    <summary>🔧 Technical Details (For Developers)</summary>
+                    <div class="tech-details">
+                        <p>This is a 500 Internal Server Error. The server encountered an unexpected condition that prevented it from fulfilling the request.</p>
+                        <p><strong>What to do:</strong></p>
+                        <ul>
+                            <li>Check the server logs for detailed error information</li>
+                            <li>Verify database connectivity</li>
+                            <li>Check for syntax errors in recent code changes</li>
+                            <li>Ensure all required services are running</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.error-page {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #3d1b1b 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    margin: 2rem 0;
+}
+
+.error-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.error-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: shake 2s ease-in-out infinite;
+}
+
+.error-icon .monster {
+    animation-delay: 0s;
+}
+
+.error-icon .demon {
+    animation-delay: 0.7s;
+}
+
+.error-icon .alien {
+    animation-delay: 1.4s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0px); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.error-title {
+    font-size: 3rem;
+    color: #ff4757;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    margin-bottom: 1.5rem;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+}
+
+.spooky-text {
+    font-size: 1.3rem;
+    color: #f8f9fa;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.error-description {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    border-left: 4px solid #ff4757;
+}
+
+.error-description p {
+    color: #e9ecef;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.error-reasons {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.error-reasons li {
+    color: #ced4da;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.error-reasons li:hover {
+    background: rgba(255, 71, 87, 0.1);
+    transform: translateX(10px);
+}
+
+.escape-options {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    border-left: 4px solid #4ecdc4;
+}
+
+.escape-options h3 {
+    color: #4ecdc4;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.navigation-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #ff4757, #c44569);
+    color: white;
+    border-color: #ff4757;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #c44569, #ff4757);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    color: white;
+    border-color: #4ecdc4;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(45deg, #44a08d, #4ecdc4);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+}
+
+.btn-danger {
+    background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+    color: white;
+    border-color: #6c5ce7;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(45deg, #a29bfe, #6c5ce7);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+.horror-quote {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #fdcb6e;
+    margin-bottom: 2rem;
+}
+
+.horror-quote blockquote {
+    margin: 0;
+    color: #f8f9fa;
+    font-style: italic;
+}
+
+.horror-quote blockquote p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.horror-quote cite {
+    color: #fdcb6e;
+    font-size: 0.9rem;
+    font-style: normal;
+}
+
+.technical-info {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #2ed573;
+    text-align: left;
+}
+
+.technical-info summary {
+    color: #2ed573;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.technical-info summary:hover {
+    color: #26de81;
+}
+
+.tech-details {
+    color: #ced4da;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.tech-details p {
+    margin-bottom: 1rem;
+}
+
+.tech-details ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.tech-details li {
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .error-title {
+        font-size: 2rem;
+    }
+    
+    .error-icon {
+        font-size: 3rem;
+    }
+    
+    .navigation-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+    
+    .error-reasons {
+        max-width: 100%;
+    }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+    .error-page {
+        background: linear-gradient(135deg, #0a0a0a 0%, #2e0f0f 100%);
+    }
+    
+    .error-description,
+    .escape-options,
+    .horror-quote,
+    .technical-info {
+        background: rgba(255, 255, 255, 0.08);
+    }
+}
+</style>
+{% endblock %}
