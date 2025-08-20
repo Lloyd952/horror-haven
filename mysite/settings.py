@@ -20,6 +20,7 @@ PRODUCTION CONFIGURATION:
 from pathlib import Path
 import os
 import dj_database_url
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +32,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # 
 # For production (Heroku), these are set automatically
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+
+# Detect if we're running tests
+IS_TESTING = 'test' in sys.argv or 'testserver' in sys.argv
+
+# Override DEBUG for testing
+if IS_TESTING:
+    DEBUG = True
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-5&0y3zgv8ka06gsix4*s8#w03tf=0)-liitu^nodl)&#ugi_*a')
 
 # Heroku domain - update this if you change your app name
@@ -171,7 +179,7 @@ LOGIN_REDIRECT_URL = 'blog:post_list'
 LOGIN_URL = 'login'
 
 # Security settings for production
-if not DEBUG:
+if not DEBUG and not IS_TESTING:
     # Security headers
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -220,7 +228,7 @@ if not DEBUG:
         },
     }
 else:
-    # Development-specific settings
+    # Development and testing settings
     ALLOWED_HOSTS = ['*']
     SECURE_SSL_REDIRECT = False
     SESSION_COOKIE_SECURE = False
